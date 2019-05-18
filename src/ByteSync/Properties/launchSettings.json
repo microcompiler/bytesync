@@ -1,0 +1,10 @@
+﻿{
+  "profiles": {
+    "ByteSync": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

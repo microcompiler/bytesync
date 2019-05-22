@@ -43,6 +43,7 @@
 - **ExcludeDirs**: Exclude directories from source that match any of the filespecs
 - **IncludeFiles**: Only include files from source that match one of the filespecs
 - **IncludeDirs**: Only include directories from source that match one of the filespecs
+
 Note: **IncludeFiles** and **ExcludeFiles** or **IncludeDirs** and **ExcludeDirs** may not be combined in the same filter. 
 
 Wildcards matching in paths can be used as filters. You can use '?' to match any single character and '*' to match zero or more of any characters.
@@ -65,7 +66,7 @@ Wildcards matching in paths can be used as filters. You can use '?' to match any
 }
 ```
 
-**IncludeFiles** and **ExcludeFiles** files options may be combined.
+**IncludeFiles** and **ExcludeDirs** files options may be combined.
 ```json
 {
   "StorageSync": {
@@ -75,7 +76,7 @@ Wildcards matching in paths can be used as filters. You can use '?' to match any
 }
 ```
 
-**IncludeDirs** and **ExcludeDirs** directories options may be combined.
+**ExcludeFiles** and **ExcludeDirs** directories options may be combined.
 ```json
 {
   "StorageSync": {
@@ -90,10 +91,10 @@ The default `Logging` configuration property can be set to `Trace` displaying al
 ```json
 "Logging": {
 	"LogLevel": {
-      "Default": "Trace",
-      "Microsoft": "Warning",
-      "Microsoft.Hosting.Lifetime": "Information"
-    }
+		"Default": "Trace",
+		"Microsoft": "Warning",
+		"Microsoft.Hosting.Lifetime": "Information"
+	}
 }
 ```
 
@@ -115,8 +116,10 @@ byteSync.exe --StorageSync:SyncInterval=30 --StorageSync:DirSrc="c:\SourceFolder
 Register ByteSync as a Windows Service using the _Windows_ administrator command prompt:
 
 ```console
-sc create ByteSync displayname="Bytewize ByteSync" binpath="<path>"
+sc create ByteSync displayname="Bytewize ByteSync" description="Directory synchronization worker service" binpath="<path>"
 ```
+Running ByteSync as a windows service will output messages to the windows event log.
+
 ## Build your own version
 
 If you would like to modify the source code. Run the following _Windows_ command according to your target platform.

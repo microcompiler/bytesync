@@ -48,6 +48,13 @@
       "frameworks": {
         "netcoreapp3.0": {
           "dependencies": {
+            "Microsoft.AspNetCore.App.Runtime.win-x64": {
+              "include": "None",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.0.0-preview5-19227-01, )",
+              "autoReferenced": true
+            },
             "Microsoft.Extensions.Hosting": {
               "target": "Package",
               "version": "[3.0.0-preview5.19227.9, )"
@@ -61,13 +68,49 @@
               "target": "Package",
               "version": "[3.0.0-preview5.19224.8, )",
               "autoReferenced": true
+            },
+            "runtime.win-x64.Microsoft.NETCore.App": {
+              "include": "None",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.0.0-preview5-27626-15, )",
+              "autoReferenced": true
+            },
+            "runtime.win-x64.Microsoft.NETCore.DotNetHostPolicy": {
+              "include": "None",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.0.0-preview5-27626-15, )",
+              "autoReferenced": true
+            },
+            "runtime.win-x64.Microsoft.NETCore.DotNetHostResolver": {
+              "include": "None",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.0.0-preview5-27626-15, )",
+              "autoReferenced": true
+            },
+            "runtime.win-x64.Microsoft.WindowsDesktop.App": {
+              "include": "None",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.0.0-preview5-27626-15, )",
+              "autoReferenced": true
             }
           },
           "imports": [
             "net461"
           ],
           "assetTargetFallback": true,
-          "warn": true
+          "warn": true,
+          "frameworkReferences": [
+            "Microsoft.NETCore.App"
+          ]
+        }
+      },
+      "runtimes": {
+        "win-x64": {
+          "#import": []
         }
       }
     }

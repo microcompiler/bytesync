@@ -1,4 +1,3 @@
-C:\Repos\Github\bytesync\src\ByteSync\bin\Release\netcoreapp3.0\win-x64\appsettings.Development.json
 C:\Repos\Github\bytesync\src\ByteSync\bin\Release\netcoreapp3.0\win-x64\appsettings.json
 C:\Repos\Github\bytesync\src\ByteSync\bin\Release\netcoreapp3.0\win-x64\ByteSync.exe
 C:\Repos\Github\bytesync\src\ByteSync\bin\Release\netcoreapp3.0\win-x64\ByteSync.deps.json
@@ -259,3 +258,4 @@ C:\Repos\Github\bytesync\src\ByteSync\obj\Release\netcoreapp3.0\win-x64\ByteSync
 C:\Repos\Github\bytesync\src\ByteSync\obj\Release\netcoreapp3.0\win-x64\ByteSync.csproj.CopyComplete
 C:\Repos\Github\bytesync\src\ByteSync\obj\Release\netcoreapp3.0\win-x64\ByteSync.dll
 C:\Repos\Github\bytesync\src\ByteSync\obj\Release\netcoreapp3.0\win-x64\ByteSync.pdb
+C:\Repos\Github\bytesync\src\ByteSync\obj\Release\netcoreapp3.0\win-x64\ByteSync.csprojAssemblyReference.cache

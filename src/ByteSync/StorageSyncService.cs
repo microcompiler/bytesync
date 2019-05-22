@@ -100,7 +100,7 @@ namespace Bytewizer.ByteSync
         /// <returns></returns>
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            _logger.LogInformation("Background Service is starting.");
+            _logger.LogInformation("Background Sync Service is starting.");
 
             try
             {
@@ -132,6 +132,8 @@ namespace Bytewizer.ByteSync
                 if (!Validate(SourceDirectory.FullName, DestinationDirectory.FullName, Configuration))
                     return Task.CompletedTask;
 
+                _logger.LogInformation("Source root path: {1}", source);
+                _logger.LogInformation("Destination root path: {1}", destination);
             }
             catch (Exception ex)
             {
@@ -151,7 +153,7 @@ namespace Bytewizer.ByteSync
         /// <returns></returns>
         public Task StopAsync(CancellationToken cancellationToken)
         {
-            _logger.LogInformation("Background Service is stopping.");
+            _logger.LogInformation("Background Sync Service is stopping.");
 
             _timer?.Change(Timeout.Infinite, 0);
 

@@ -6,26 +6,26 @@
  ByteSync directory synchronization worker service is based on source code of BlinkSync command line ([http://blinksync.sourceforge.net](http://blinksync.sourceforge.net)).
 
 ## Configuration
- ByteSync reads from _Microsoft.Extensions.Configuration_, .NET Core's `appsettings.json` file. Configuration is read from the `StorageSync` section.
+ ByteSync reads from _Microsoft.Extensions.Configuration_, .NET Core's `appsettings.json` file. Configuration is read from the `SyncService` section.
 
 ```json
 {
   "Logging": {
-	"LogLevel": {
+    "LogLevel": {
       "Default": "Information",
       "Microsoft": "Warning",
       "Microsoft.Hosting.Lifetime": "Information"
     }
   },
-  "StorageSync": {
-    "SyncInterval": 10,
+  "SyncService": {
+    "Interval": 10,
     "DirSrc": "c:\\SourceFolder",
     "DirDest": "c:\\DestinationFolder",
     "ExcludeHidden": true,
     "DeleteFromDest": true,
     "ExcludeFiles": [],
     "ExcludeDirs": [],
-    "IncludeFiles": []
+    "IncludeFiles": [],
     "IncludeDirs": [],
     "DeleteExcludeFiles": [],
     "DeleteExcludeDirs": []
@@ -49,7 +49,7 @@ Note: **IncludeFiles** and **ExcludeFiles** or **IncludeDirs** and **ExcludeDirs
 Wildcards matching in paths can be used as filters. You can use '?' to match any single character and '*' to match zero or more of any characters.
 ```json
 {
-  "StorageSync": {
+  "SyncService": {
     "IncludeFiles": ["foo.*", "ba?.txt"],
   }
 }
@@ -58,7 +58,7 @@ Wildcards matching in paths can be used as filters. You can use '?' to match any
 **DeleteExcludeFiles** and **DeleteExcludeDirs** exclude-from-deletion options require deletion **DeleteFromDest** enabled to be affective.
 ```json
 {
-  "StorageSync": {
+  "SyncService": {
     "DeleteFromDest": true,
     "DeleteExcludeFiles": ["foo.txt", "bar.txt", "foo\foo1.txt", "foo\foo2.txt"],
     "DeleteExcludeDirs": ["bin", "obj"]
@@ -69,7 +69,7 @@ Wildcards matching in paths can be used as filters. You can use '?' to match any
 **IncludeFiles** and **ExcludeDirs** files options may be combined.
 ```json
 {
-  "StorageSync": {
+  "SyncService": {
     "ExcludeFiles": ["foo.txt", "bar.txt", "foo\foo1.txt", "foo\foo2.txt"],
     "ExcludeDirs": ["bin", "obj"]
   }
@@ -79,7 +79,7 @@ Wildcards matching in paths can be used as filters. You can use '?' to match any
 **ExcludeFiles** and **ExcludeDirs** directories options may be combined.
 ```json
 {
-  "StorageSync": {
+  "SyncService": {
     "ExcludeFiles": ["foo.txt", "bar.txt", "foo\foo1.txt", "foo\foo2.txt"],
     "ExcludeDirs": ["bin", "obj"],
   }
@@ -87,14 +87,14 @@ Wildcards matching in paths can be used as filters. You can use '?' to match any
 ```
 
 ### Level overrides
-The default `Logging` configuration property can be set to `Trace` displaying all file commands. This is useful for validating include and exclude filters.
+The default `Logging` configuration property can be set to `Trace` displaying all file copy commands. This is useful for validating include and exclude filters.
 ```json
 "Logging": {
-	"LogLevel": {
-		"Default": "Trace",
-		"Microsoft": "Warning",
-		"Microsoft.Hosting.Lifetime": "Information"
-	}
+  "LogLevel": {
+    "Default": "Trace",
+    "Microsoft": "Warning",
+    "Microsoft.Hosting.Lifetime": "Information"
+  }
 }
 ```
 
@@ -102,14 +102,14 @@ The default `Logging` configuration property can be set to `Trace` displaying al
 You can add or override ByteSync configuration through the environment.  For example, to set the sync interval, directory source and destination using the _Windows_ command prompt:
 
 ```console
-set STORAGESYNC__SYNCINTERVAL=30
-set STORAGESYNC__DIRSRC=c:\SourceFolder
-set STORAGESYNC__DIRDEST=c:\DestinationFolder
+set SYNCSERVICE__INTERVAL=30
+set SYNCSERVICE__DIRSRC=c:\SourceFolder
+set SYNCSERVICE__DIRDEST=c:\DestinationFolder
 ```
 ### Command line
 You can add or override ByteSync configuration through the command.  For example, to set the sync interval, directory source and destination using the _Windows_ command prompt:
 ```console
-byteSync.exe --StorageSync:SyncInterval=30 --StorageSync:DirSrc="c:\SourceFolder" --StorageSync:DirDest="c:\DestinationFolder"
+byteSync.exe --SyncService:Interval=30 --SyncService:DirSrc="c:\SourceFolder" --SyncService:DirDest="c:\DestinationFolder"
 ```
 
 ## Run as a Windows Service

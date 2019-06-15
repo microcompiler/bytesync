@@ -15,14 +15,14 @@ namespace Bytewizer.ByteSync
     /// <summary>
     /// Initializes a long running timer task <see cref="IHostedService"/>.
     /// </summary>
-    class StorageSyncService : DisposableObject, IHostedService
+    class SyncService : DisposableObject, IHostedService
     {
         #region Lifetime
 
         /// <summary>
-        /// Initializes a new instance of <see cref="StorageSyncService"/> object.
+        /// Initializes a new instance of <see cref="SyncService"/> object.
         /// </summary>
-        public StorageSyncService(ILogger<StorageSyncService> logger, IConfiguration configuration)
+        public SyncService(ILogger<SyncService> logger, IConfiguration configuration)
         {
             _config = configuration;
             _logger = logger;
@@ -104,9 +104,9 @@ namespace Bytewizer.ByteSync
 
             try
             {
-                var interval = _config.GetSection("StorageSync:SyncInterval").Get<double>();
-                var source = _config.GetSection("StorageSync:DirSrc").Get<string>();
-                var destination = _config.GetSection("StorageSync:DirDest").Get<string>();
+                var interval = _config.GetSection("SyncService:Interval").Get<double>();
+                var source = _config.GetSection("SyncService:DirSrc").Get<string>();
+                var destination = _config.GetSection("SyncService:DirDest").Get<string>();
 
                 if (interval <= 0)
                 {
@@ -119,14 +119,14 @@ namespace Bytewizer.ByteSync
                 DestinationDirectory = new DirectoryInfo(destination);
                 Configuration = new InputParams
                 {
-                    ExcludeHidden = _config.GetSection("StorageSync:ExcludeHidden").Get<bool>(),
-                    DeleteFromDest = _config.GetSection("StorageSync:DeleteFromDest").Get<bool>(),
-                    ExcludeFiles = FileSpecsToRegex(_config.GetSection("StorageSync:ExcludeFiles").Get<string[]>()),
-                    ExcludeDirs = FileSpecsToRegex(_config.GetSection("StorageSync:ExcludeDirs").Get<string[]>()),
-                    IncludeFiles = FileSpecsToRegex(_config.GetSection("StorageSync:IncludeFiles").Get<string[]>()),
-                    IncludeDirs = FileSpecsToRegex(_config.GetSection("StorageSync:IncludeDirs").Get<string[]>()),
-                    DeleteExcludeFiles = FileSpecsToRegex(_config.GetSection("StorageSync:DeleteExcludeFiles").Get<string[]>()),
-                    DeleteExcludeDirs = FileSpecsToRegex(_config.GetSection("StorageSync:DeleteExcludeDirs").Get<string[]>())
+                    ExcludeHidden = _config.GetSection("SyncService:ExcludeHidden").Get<bool>(),
+                    DeleteFromDest = _config.GetSection("SyncService:DeleteFromDest").Get<bool>(),
+                    ExcludeFiles = FileSpecsToRegex(_config.GetSection("SyncService:ExcludeFiles").Get<string[]>()),
+                    ExcludeDirs = FileSpecsToRegex(_config.GetSection("SyncService:ExcludeDirs").Get<string[]>()),
+                    IncludeFiles = FileSpecsToRegex(_config.GetSection("SyncService:IncludeFiles").Get<string[]>()),
+                    IncludeDirs = FileSpecsToRegex(_config.GetSection("SyncService:IncludeDirs").Get<string[]>()),
+                    DeleteExcludeFiles = FileSpecsToRegex(_config.GetSection("SyncService:DeleteExcludeFiles").Get<string[]>()),
+                    DeleteExcludeDirs = FileSpecsToRegex(_config.GetSection("SyncService:DeleteExcludeDirs").Get<string[]>())
                 };
 
                 if (!Validate(SourceDirectory.FullName, DestinationDirectory.FullName, Configuration))
@@ -153,10 +153,8 @@ namespace Bytewizer.ByteSync
         /// <returns></returns>
         public Task StopAsync(CancellationToken cancellationToken)
         {
-            _logger.LogInformation("Background Sync Service is stopping.");
-
             _timer?.Change(Timeout.Infinite, 0);
-
+            _logger.LogInformation("Background Sync Service is stopping.");
             return Task.CompletedTask;
         }
 

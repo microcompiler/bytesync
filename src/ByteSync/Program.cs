@@ -15,7 +15,7 @@ namespace Bytewizer.ByteSync
             .UseWindowsService()    
             .ConfigureServices(services =>
                 {
-                    services.AddHostedService<StorageSyncService>();
+                    services.AddHostedService<SyncService>();
                 });
     }
 }
